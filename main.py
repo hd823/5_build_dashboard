@@ -48,6 +48,11 @@ if st.session_state.aktuelle_versuchsperson in person_names:
 image = Image.open(st.session_state.picture_path)
 st.image(image, caption=st.session_state.aktuelle_versuchsperson)
 
+# Alter der Versuchsperson anzeigen
+st.write("Id der Versuchsperson ist: ", read_person_data.load_by_id(st.session_state.aktuelle_versuchsperson))
+st.write("Alter der Versuchsperson ist: ", read_person_data.calc_age(st.session_state.aktuelle_versuchsperson))
+st.write("Maximale Herzfrequenz der Versuchsperson ist: ", read_person_data.calc_max_hr(st.session_state.aktuelle_versuchsperson))
+
 #% Öffne EKG-Daten
 # TODO: Für eine Person gibt es ggf. mehrere EKG-Daten. Diese müssen über den Pfad ausgewählt werden können
 # Vergleiche Bild und Per-son
@@ -64,4 +69,4 @@ st.plotly_chart(current_egk_data.fig)
 # Schätze die Herzrate 
 #current_egk_data.estimate_hr()
 # Zeige die Herzrate an
-#st.write("Herzrate ist: ", int(current_egk_data.heat_rate)) 
+#st.write("Herzrate ist: ", int(current_egk_data.heat_rate))

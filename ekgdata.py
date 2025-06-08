@@ -1,6 +1,8 @@
 import json
 import pandas as pd
 import plotly.express as px
+import read_person_data
+from person_class import Person
 
 # %% Objekt-Welt
 
@@ -23,6 +25,17 @@ class EKGdata:
         # Erstellte einen Line Plot, der ersten 2000 Werte mit der Zeit aus der x-Achse
         self.fig = px.line(self.df.head(2000), x="Zeit in ms", y="Messwerte in mV")
         #return self.fig 
+
+def load_by_id(ekg_id):
+    ekg_by_id = None
+
+    person_data = read_person_data.load_person_data()
+    for person in person_data:
+        if int(ekg_id) == int(person["ekg_id"]):
+            ekg_by_id = EKGdata.__init__(ekg_dict=person["ekg_tests"][ekg_id])	
+            break
+
+    return ekg_by_id
 
 
 if __name__ == "__main__":
